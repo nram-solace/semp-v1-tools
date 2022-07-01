@@ -1,0 +1,12 @@
+<rpc semp-version="soltr/%s">
+    <authentication>
+    <ldap-profile>
+      <profile-name>%s</profile-name>
+      <no>
+        <ldap-server>
+          <server-index>%d</server-index>
+        </ldap-server>
+      </no>
+    </ldap-profile>
+  </authentication>
+</rpc>

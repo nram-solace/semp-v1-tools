@@ -1,0 +1,4 @@
+Document scripts
+Write output of CheckConfig to file [DONE]
+Compact output for CheckConfig (skip OK status)
+Stats analysis / graphing tools -- out of scope ? 

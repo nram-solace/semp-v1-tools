@@ -1,0 +1,45 @@
+{
+  "CLI_Users":[
+    {"username":"vpn_rw_user",
+      "password":"test123",
+      "global-access-level":"none",
+      "vpn-access-level":"read-only",
+      "vpn-access-exception":"TESTVPN:read-write" },
+
+    { "username":"global_rw_user",
+      "password":"test123",
+      "global-access-level":"read-write",
+      "vpn-access-level":"none",
+      "vpn-access-exception":"none" },
+
+      { "username":"global_ro_user",
+      "password":"test123",
+      "global-access-level":"read-only",
+      "vpn-access-level":"none",
+      "vpn-access-exception":"none" }
+    ],
+
+  "LDAP_Profiles":[
+    {"profile-name":"profile1",
+    "admin-dn":"cn=ldapadm,dc=nram,dc=local",
+    "admin-password":"admin123",
+    "base-dn":"ou=solace_users,dc=nram,dc=local",
+    "filter":"(cn=$CLIENT_USERNAME)",
+      "ldap-servers":[
+        {"server":"ldap://server1", "index":1},
+        {"server":"ldap://server2", "index":2}
+      ]
+    },
+
+    {"profile-name":"profile2",
+    "admin-dn":"cn=ldapadm2,dc=nram,dc=local",
+    "admin-password":"admin123",
+    "base-dn":"ou=solace_users,dc=nram2,dc=local",
+    "filter":"(cn=$CLIENT_USERNAME)",
+      "ldap-servers":[
+        {"server":"ldap://server3", "index":1}
+      ]
+    }
+  ]
+}
+

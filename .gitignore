@@ -1,0 +1,6 @@
+bak/**
+*/.idea
+*/__pycache__
+pkg/**
+tmp/**
+*.swp

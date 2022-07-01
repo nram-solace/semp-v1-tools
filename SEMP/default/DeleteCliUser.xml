@@ -1,0 +1,7 @@
+<rpc semp-version="soltr/%s">
+  <no>
+    <username>
+      <name>%s</name>
+    </username>
+  </no>
+</rpc>

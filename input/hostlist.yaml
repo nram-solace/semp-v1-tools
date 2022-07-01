@@ -1,0 +1,7 @@
+default:
+    port: 8000
+    username: admin
+    password: admin
+
+hostlist:
+    - vmr16:8000

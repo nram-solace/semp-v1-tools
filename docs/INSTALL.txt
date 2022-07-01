@@ -1,0 +1,15 @@
+Unzip the package SEMPTools-<verson>.zip
+If file permissions are not set,
+   cd SEMPTools
+   chmod +x bin/*.py bin/*.sh
+If running for the first time, check if all required modules are present
+If any modules are reported missing, follow standard Python module install
+process for your OS
+For e.g, on MacOS
+  brew install python pip
+  sudo pip install pyyaml
+PyYaml is also packaged under pkg/ dir
+   cd pkg
+   ./setup.sh
+Verify things are working ok with
+  python bin/CheckSolaceSetup.py -h

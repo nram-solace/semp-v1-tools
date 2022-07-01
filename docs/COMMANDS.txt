@@ -1,0 +1,70 @@
+Check VPN config on one more more of VMRs
+----------------------------------------------------------------------------------------------------------------------
+$ python bin/CheckSolaceSetup.py --vpn TESTVPN --hostlist input/hostlist.yaml --sitedefaults input/site-defaults.yaml
+
+Collect Performance test metrics/discard stats
+----------------------------------------------------------------------------------------------------------------------
+$ python bin/GetSolaceStats.py --host 192.168.1.111:8000 --vpn MarketData
+
+Running stats collection in a loop
+$ python bin/GetSolaceStats.py --host vmr16:8000 --vpn MarketData --password admin --loop --delay 30
+[NOTICE] === GetSolaceStats (v0.1) Starting
+[NOTICE] [2017-08-16 18:59:27] Getting VPN stats for VPN MarketData
+[NOTICE] Looping forever with 30 seconds delay
+[NOTICE] [2017-08-16 18:59:58] Getting VPN stats for VPN MarketData
+[NOTICE] [2017-08-16 19:00:28] Getting VPN stats for VPN MarketData
+...
+$ tail -5  out/solace_stats.tvo
+timestamp=20170816135928,stats=client,total-egress-discards=0,total-clients-connected=3,total-client-messages-received=18,total-clients=4,total-clients-connected-service-mqtt=0,total-ingress-discards=6,total-clients-connected-with-ssl=0,current-ingress-rate-per-second=0,current-egress-rate-per-second=0,total-client-messages-sent=6,vpn=MarketData
+timestamp=20170816135958,stats=vpn,current-egress-byte-rate-per-second=0,total-egress-discards=0,current-ingress-byte-rate-per-second=0,total-ingress-discards=0,current-ingress-rate-per-second=0,current-egress-rate-per-second=0,vpn=MarketData
+timestamp=20170816135958,stats=client,total-egress-discards=0,total-clients-connected=3,total-client-messages-received=18,total-clients=4,total-clients-connected-service-mqtt=0,total-ingress-discards=6,total-clients-connected-with-ssl=0,current-ingress-rate-per-second=0,current-egress-rate-per-second=0,total-client-messages-sent=6,vpn=MarketData
+timestamp=20170816140028,stats=vpn,current-egress-byte-rate-per-second=0,total-egress-discards=0,current-ingress-byte-rate-per-second=0,total-ingress-discards=0,current-ingress-rate-per-second=0,current-egress-rate-per-second=0,vpn=MarketData
+timestamp=20170816140028,stats=client,total-egress-discards=0,total-clients-connected=3,total-client-messages-received=18,total-clients=4,total-clients-connected-service-mqtt=0,total-ingress-discards=6,total-clients-connected-with-ssl=0,current-ingress-rate-per-second=0,current-egress-rate-per-second=0,total-client-messages-sent=6,vpn=MarketData
+
+Clear VPN/Router stats before running test
+----------------------------------------------------------------------------------------------------------------------
+$ python bin/ClearSolaceStats.py  --host 192.168.1.111:8000 --vpn TESTVPN
+
+Creating CLI users
+----------------------------------------------------------------------------------------------------------------------
+$ python bin/ConfigureSolaceRouter.py --cfgfile input/router_config.json --router 192.168.1.111:8000  --password admin --create --cliusers
+[NOTICE] === ConfigureSolaceRouter (v0.1) Starting
+[NOTICE] Creating CLI User vpn_rw_user
+[NOTICE] VPN access exception not implemented
+[NOTICE] Creating CLI User global_rw_user
+[NOTICE] Creating CLI User global_ro_user
+
+Deleting CLI Users
+----------------------------------------------------------------------------------------------------------------------
+$ python bin/ConfigureSolaceRouter.py --cfgfile input/router_config.json --router 192.168.1.111:8000  --password admin --delete --cliusers
+[NOTICE] === ConfigureSolaceRouter (v0.1) Starting
+[NOTICE] Deleting CLI User vpn_rw_user
+[NOTICE] Deleting CLI User global_rw_user
+[NOTICE] Deleting CLI User global_ro_user
+
+
+Creating LDAP Profiles
+----------------------------------------------------------------------------------------------------------------------
+$ python bin/ConfigureSolaceRouter.py --cfgfile input/router_config.json --router 192.168.1.111:8000  --password admin --create --ldapprofiles
+[NOTICE] === ConfigureSolaceRouter (v0.1) Starting
+[NOTICE] Creating LDAP Profile profile1
+[NOTICE] Configuring Admin DN (cn=ldapadm,dc=nram,dc=local) for LDAP Profile profile1
+[NOTICE] Configuring Base DN (ou=solace_users,dc=nram,dc=local) for LDAP Profile profile1
+[NOTICE] Configuring Filter ((cn=$CLIENT_USERNAME)) for LDAP Profile profile1
+[NOTICE] Configuring TLS for LDAP Profile profile1
+[NOTICE] Configuring server ldap://server1 (1) for LDAP Profile profile1
+[NOTICE] Configuring server ldap://server2 (2) for LDAP Profile profile1
+[NOTICE] Creating LDAP Profile profile2
+[NOTICE] Configuring Admin DN (cn=ldapadm2,dc=nram,dc=local) for LDAP Profile profile2
+[NOTICE] Configuring Base DN (ou=solace_users,dc=nram2,dc=local) for LDAP Profile profile2
+[NOTICE] Configuring Filter ((cn=$CLIENT_USERNAME)) for LDAP Profile profile2
+[NOTICE] Configuring TLS for LDAP Profile profile2
+[NOTICE] Configuring server ldap://server3 (1) for LDAP Profile profile2
+
+
+Deleting LDAP Profiles
+----------------------------------------------------------------------------------------------------------------------
+$ python bin/ConfigureSolaceRouter.py --cfgfile input/router_config.json --router 192.168.1.111:8000  --password admin --delete --ldapprofiles
+[NOTICE] === ConfigureSolaceRouter (v0.1) Starting
+[NOTICE] Deleting LDAP Profile profile1
+[NOTICE] Deleting LDAP Profile profile2

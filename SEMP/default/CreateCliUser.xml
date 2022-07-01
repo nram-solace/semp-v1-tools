@@ -1,0 +1,10 @@
+<rpc semp-version="soltr/%s">
+    <create>
+        <username>
+            <name>%s</name>
+            <password>%s</password>
+            <cli></cli>
+            <access-level>%s</access-level>
+        </username>
+    </create>
+</rpc>

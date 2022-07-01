@@ -1,0 +1,12 @@
+<rpc semp-version="soltr/%s">
+  <authentication>
+    <ldap-profile>
+      <profile-name>%s</profile-name>
+      <group-membership-secondary-search>
+        <base-dn>
+          <distinguished-name>%s</distinguished-name>
+        </base-dn>
+      </group-membership-secondary-search>
+    </ldap-profile>
+  </authentication>
+</rpc>

@@ -1,0 +1,24 @@
+python bin/GetSolaceStats.py --host shared-vmr-0.sys.pcftest.soltest.net --vpn v001 --user rouser -v
+
+python bin/ConfigureSolaceRouter.py --cfgfile input/router_config.json --router  shared-vmr-0.sys.pcftest.soltest.net  --password admin --create --cliusers
+
+python bin/ConfigureSolaceRouter.py --cfgfile input/router_config.json --router shared-vmr-0.sys.pcftest.soltest.net  --password admin --create --ldapprofiles
+
+python bin/ManageVpn2.py --host shared-vmr-0.sys.pcftest.soltest.net --user admin --password admin --vpn v001 --create --clientuser user1 --clientpassword user123 --queue myqueue
+
+http://shared-vmr-0.sys.pcftest.soltest.net/SEMP/v2/config/msgVpns
+
+http://shared-vmr-0.sys.pcftest.soltest.net/SEMP/v2/config/msgVpns/v001
+
+curl -X POST -u admin:admin shared-vmr-0.sys.pcftest.soltest.net/SEMP/v2/config/msgVpns/v001/queues \
+  -H "content-type: application/json" \
+  -d '{"queueName":"testq2"}'
+
+curl -X PATCH -u admin:admin shared-vmr-0.sys.pcftest.soltest.net/SEMP/v2/config/msgVpns/v001/queues/testq3 \
+  -H "content-type: application/json" \
+  -d '{"maxTtl":10, "maxBindCount":10, "maxRedeliveryCount":10, "owner":"v001.c000001"}'
+
+curl -X PUT -u admin:admin shared-vmr-0.sys.pcftest.soltest.net/SEMP/v2/config/msgVpns/v001/queues/testq2 \
+  -H "content-type: application/json" \
+  -d '{"ingressEnabled":true, "egressEnabled":true}'
+

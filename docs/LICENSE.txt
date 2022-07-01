@@ -1,0 +1,2 @@
+SEMPTools is not an offically supported product by Solace or Solace PSG.
+This is based on modular POSSolMgr codebase

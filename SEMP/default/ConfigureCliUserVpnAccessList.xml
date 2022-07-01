@@ -1,0 +1,13 @@
+<rpc semp-version="soltr/%s">
+  <username>
+    <name>%s</name>
+    <message-vpn>
+      <access-level-exception>
+        <vpn-name>%s</vpn-name>
+        <access-level>
+          <access-level>%s</access-level>
+        </access-level>
+      </access-level-exception>
+    </message-vpn>
+  </username>
+</rpc>

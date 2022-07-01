@@ -1,0 +1,56 @@
+router:
+    config-status: up
+    min-connections: 1
+    min-unique-subscriptions: 10
+    max-active-disk-partition-usage: 50
+    min-egress-flows: 5
+    min-ingress-flows: 10
+    max-total-clients: 100
+vpn:
+    - TESTVPN :
+        config-status: up
+        smf-plain-status: up
+        smf-plain-port: 55555
+        smf-compressed-port: 55003
+        smf-ssl-status: up
+        smf-ssl-port: 55443
+        mqtt-plain-status: down
+        mqtt-plain-port: 1883
+        mqtt-ssl-status: up
+        mqtt-ssl-port: 8883
+        rest-plain-status: up
+        rest-plain-port: 1111
+        rest-ssl-status: up
+        rest-plain-port: 2222
+
+    - MarketData :
+        config-status: up
+        smf-plain-status: up
+        smf-plain-port: 55555
+        smf-compressed-port: 55003
+        smf-ssl-status: up
+        smf-ssl-port: 55443
+        mqtt-plain-status: down
+        mqtt-plain-port: 1880
+        mqtt-ssl-status: up
+        mqtt-ssl-port: 8883
+        rest-plain-status: up
+        rest-plain-port: 1111
+        rest-ssl-status: up
+        rest-plain-port: 2222
+        rest-ssl-port: 9443
+queue:
+    - MarketData-testQ :
+        config-status: down
+        min-bind-count: 0
+
+    - MarketData-SubMgrEventQueue :
+        config-status: up
+        min-bind-count: 6
+
+clientuser:
+    - MarketData-default: 
+         config-status: down
+    - MarketData-user1: 
+         config-status: up
+
